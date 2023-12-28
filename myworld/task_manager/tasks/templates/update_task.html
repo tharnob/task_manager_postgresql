@@ -1,0 +1,60 @@
+{% extends "master.html" %}
+
+{% block title %}
+    Add Student
+{% endblock %}
+
+
+{% block content %}
+
+{% include "navbar.html" %}
+
+<h1 class="mt-4 text-center">Update Task</h1>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card bg-info">
+                <div class="card-body m-4">
+                    <form action="/do-update-task/{{task.id}}" method="POST">
+                        {% csrf_token %} 
+
+
+
+                        <div class="mb-3">
+                            <label for="title">Title</label>
+                            <input value="{{task.title}}" name="title" type="text" name="title" id="title" class="form-control" placeholder="Enter Your Task Title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" rows="5"  class="form-control" placeholder="Enter Your Task Description">{{task.description}}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="due_date">Due Date</label>
+                            <input value="{{task.due_date}}" name="due_date" type="date" id="due_date" class="form-control" placeholder="Enter Due Date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="priority">Priority</label>
+                            <select class="form-control" id="priority" name="priority">
+                              <option value="low" selected>Low</option>
+                              <option value="medium">Medium</option>
+                              <option value="high">High</option>
+                            </select>
+                          </div>
+
+
+
+                        <div class="container text-center mt-4">
+                            <button class="btn btn-success">Update Task</button>
+                        </div>
+                        
+
+                    </form>  
+                     
+                </div>         
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "master.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+
+{% block content %}
+
+{% include "navbar.html" %}
+
+
+
+
+
+
+<div class="container text-center mt-4">
+    <a href="/add_task/"><button class="btn btn-primary">Add Task</button></a>
+</div>
+
+
+<h1 class="text-center mt-4">List of Tasks</h1>
+
+<div class="container">
+    <div class="mb-3">
+        <label for="searchTitle" class="form-label">Search Title:</label>
+        <input type="text" class="form-control" id="searchTitle">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Serial No</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Due Date</th>
+                                <th>Priority</th>
+                                <th>Date of Creation</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for s in task %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ s.title }}</td>
+                                    <td>{{ s.description }}</td>
+                                    <td>{{ s.due_date }}</td>
+                                    <td>{{ s.priority }}</td>
+                                    <td>{{ s.created_at }}</td>
+                                    <td>
+                                        <a href="/delete-task/{{s.id}}" class="btn btn-danger md-sm">Delete</a>
+                                        <a href="/update-task/{{s.id}}" class="btn btn-success md-sm">Update</a>
+                                    </td>
+                                        
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+    // Add JavaScript for filtering tasks based on the first character of the title
+    document.getElementById('searchTitle').addEventListener('input', function () {
+        var searchValue = this.value.toLowerCase();
+        var rows = document.querySelectorAll('tbody tr');
+
+        rows.forEach(function (row) {
+            var title = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            
+            // Check if the first character of the title matches the first character of the search value
+            if (title.startsWith(searchValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+
+
+{% endblock %}

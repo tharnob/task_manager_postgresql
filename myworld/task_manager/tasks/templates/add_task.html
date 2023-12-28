@@ -1,0 +1,58 @@
+{% extends "master.html" %}
+
+{% block title %}
+    Add Student
+{% endblock %}
+
+
+{% block content %}
+
+{% include "navbar.html" %}
+
+<h1 class="mt-4 text-center">Add New Task</h1>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card bg-info">
+                <div class="card-body m-4">
+                    <form action="/add_task/" method="POST">
+                        {% csrf_token %} 
+
+
+
+                        <div class="mb-3">
+                            <label for="title">Title</label>
+                            <input name="title" type="text" name="title" id="title" class="form-control" placeholder="Enter Your Task Title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" rows="5"  class="form-control" placeholder="Enter Your Task Description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="due_date">Due Date</label>
+                            <input name="due_date" type="date" name="due_date" id="due_date" class="form-control" placeholder="Enter Due Date">
+                        </div>
+                        <div class="mb-3">
+                            <label for="priority">Priority</label>
+                            <select class="form-control" id="priority" name="priority">
+                              <option value="low">Low</option>
+                              <option value="medium">Medium</option>
+                              <option value="high">High</option>
+                            </select>
+                          </div>
+
+                        <div class="container text-center mt-4">
+                            <button class="btn btn-primary">Submit</button>
+                        </div>
+                        
+
+                    </form>  
+                     
+                </div>         
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
